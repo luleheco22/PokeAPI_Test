@@ -44,6 +44,7 @@ const Login: React.FC = () => {
      <FormLogin>
       <Container>
       {
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 fields.map((field:any)=>(
                         <InputForm
                             key={field.id}

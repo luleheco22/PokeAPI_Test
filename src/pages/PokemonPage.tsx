@@ -1,5 +1,4 @@
 import React from 'react';
-import tw from 'twin.macro';
 import usePokemon from "../hooks/usePokemon";
 import Results from '../components/Results';
 

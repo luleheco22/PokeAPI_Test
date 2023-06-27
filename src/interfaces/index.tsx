@@ -11,6 +11,7 @@ export interface Pokemon {
     moves:                  Move[];
     name:                   string;
     order:                  number;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     pastTypes:              any[];
     species:                Species;
     sprites:                Sprites;

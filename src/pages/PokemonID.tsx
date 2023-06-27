@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import usePokemon from '../hooks/usePokemon';
 import tw from 'twin.macro';
 
@@ -20,10 +20,9 @@ text-lg mb-3
 `
 
 const PokemonID: React.FC = () => {
-  const { loading, pokemon, error, getPokemon } = usePokemon();
+  const { loading, pokemon, getPokemon } = usePokemon();
   const params = useParams();
   const { id } = params;
-  console.log(id, 'El id')
 
   useEffect(() => {
     if (id) {

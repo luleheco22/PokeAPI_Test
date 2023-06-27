@@ -32,7 +32,7 @@ const Svg = tw.svg`
 h-6 fill-current text-gray-600 hover:text-orange-700
 `
 
-function Profile() {
+const Profile:React.FC = () =>  {
 
     const { user } = useAuth()
     return (

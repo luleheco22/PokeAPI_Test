@@ -64,7 +64,7 @@ const MenuItemLogout = tw.div`
 
 
 
-const Header = () => {
+const Header:React.FC = () => {
 
     const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
     const { signOffAuth } = useAuth();

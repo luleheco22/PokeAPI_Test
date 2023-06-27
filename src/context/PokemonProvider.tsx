@@ -1,5 +1,4 @@
 import React, { useState, useEffect, createContext, ReactNode } from "react";
-import { useNavigate } from "react-router-dom";
 import { Pokemon } from "../interfaces/index";
 import axios from "axios";
 
@@ -14,9 +13,8 @@ interface PokemonContextData {
     setPokemonList: React.Dispatch<React.SetStateAction<Pokemon[]>>;
     fetchNextPage: () => void;
     fetchPreviousPage: () => void;
-    getPokemon: (id: string | number) => void;
+    getPokemon: (name: string) => void;
     count: number;
-    setCount: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const PokemonContext = createContext<PokemonContextData>({} as PokemonContextData);
@@ -33,6 +31,7 @@ const PokemonProvider: React.FC<PokemonProviderProps> = ({ children }) => {
     const [pokemon, setPokemon] = useState<Pokemon | null>(null);
     const [startIndex, setStartIndex] = useState<number>(1);
     const [count, setCount] = useState<number>(0);
+
 
     useEffect(() => {
         setLoading(true);
@@ -68,6 +67,7 @@ const PokemonProvider: React.FC<PokemonProviderProps> = ({ children }) => {
 
     const fetchNextPage = async () => {
         try {
+            setLoading(true);
           const response = await axios.get(nextPageUrl);
           const pokemonDetails = await Promise.all(
             response.data.results.map(async (pokemon: Pokemon, index: number) => {
@@ -84,6 +84,7 @@ const PokemonProvider: React.FC<PokemonProviderProps> = ({ children }) => {
           setPokemonList(pokemonDetails);
           setNextPageUrl(response.data.next);
           setStartIndex(startIndex + 10);
+          setLoading(false);
         } catch (error) {
           console.log("Error fetching next Pokémon page:", error);
         }
@@ -91,7 +92,7 @@ const PokemonProvider: React.FC<PokemonProviderProps> = ({ children }) => {
 
       const fetchPreviousPage = async () => {
         try {
-            console.log(previousPageUrl, 'esto')
+            setLoading(true);
           const response = await axios.get(previousPageUrl);
           const pokemonDetails = await Promise.all(
             response.data.results.map(async (pokemon: Pokemon, index: number) => {
@@ -106,6 +107,7 @@ const PokemonProvider: React.FC<PokemonProviderProps> = ({ children }) => {
           setNextPageUrl(response.data.next);
           setPreviousPageUrl(response.data.previous);
           setStartIndex(startIndex - 10);
+          setLoading(false);
         } catch (error) {
           console.log("Error fetching previous Pokémon page:", error);
         }
@@ -113,8 +115,10 @@ const PokemonProvider: React.FC<PokemonProviderProps> = ({ children }) => {
 
     const getPokemon = async (id: string) => {
         try {
+            setLoading(true);
             const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
             setPokemon(response.data);
+            setLoading(false);
         } catch (error) {
             console.log("Error fetching Pokémon:", error);
         }

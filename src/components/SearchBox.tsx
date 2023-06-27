@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import tw from 'twin.macro';
-import usePokemon from '../hooks/usePokemon';
 
 const ContainerForm = tw.form`
   flex 
@@ -27,7 +26,6 @@ const Button = tw.button`
 
 const SearchBox: React.FC = () => {
   const [search, setSearch] = useState('');
-  const { setPokemonList } = usePokemon();
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {

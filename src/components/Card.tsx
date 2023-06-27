@@ -3,7 +3,6 @@ import { Pokemon } from '../interfaces/index';
 import { LiaHashtagSolid } from 'react-icons/lia'
 import { Link } from 'react-router-dom';
 import tw from 'twin.macro';
-import icon from '../assets/spinner.svg'
 
 const Container = tw.div`
 cursor-pointer sm:p-3 sm:hover:shadow-slate-400 sm:shadow-md rounded-lg

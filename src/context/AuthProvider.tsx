@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState, useEffect, createContext, ReactNode, ChangeEvent, Dispatch, SetStateAction } from "react";
 import { useNavigate } from "react-router-dom";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -22,7 +24,6 @@ interface AuthContextData {
     setAuth: Dispatch<SetStateAction<boolean>>;
     setUser: Dispatch<SetStateAction<any>>;
     signOffAuth: () => void;
-    alert: any
 }
 
 interface LoginState {
@@ -54,7 +55,7 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const [loginState, setLoginState] = useState<LoginState>(initialState);
     const [signUpStateForm, setSignUpStateForm] = useState<SignState>(signUpState);
     const [auth, setAuth] = useState<boolean>(false);
-    const [alert, setAlert] = useState({})
+
 
     const handleSignUp = async (e: ChangeEvent<HTMLInputElement>) => {
         e.preventDefault();
@@ -133,6 +134,7 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
                 navigate('/')
                 setLoading(false);
             }
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (error: any) {
             Swal.fire({
                 icon: 'error',
@@ -282,7 +284,6 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
                 setAuth,
                 signOffAuth,
                 auth,
-                alert,
             }}
         >
             {children}
