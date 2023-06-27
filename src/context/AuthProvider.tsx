@@ -158,11 +158,9 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
               }
             try {
                 const { data } = await axiosClient.get('/auth')
-                console.log(data, 'data')
                 if (data.user) {
-                    console.log(data.user, 'el auth')
                     setUser(data.user)
-                    //navigate('/pokemons')
+                    navigate('/pokemons')
                 }
             } catch (error) {
                 console.log(error)
@@ -172,6 +170,7 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         authenticateUser()
 
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const signOffAuth = () => {
@@ -228,20 +227,19 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
                 email:emailAddress,
                 password
             });
-            if (data && data.login) {
+            if (data && data?.login) {
                 // Almacenar el token en el almacenamiento local
                 localStorage.setItem('token', data.token);
 
                 // Actualiza el estado de autenticación y el usuario actual en el contexto
                 // setAuth(true);
-                // setUser(data);
+                setUser(data);
                 Swal.fire({
                     icon: 'success',
                     title: 'Login successfully',
                     showConfirmButton: false,
                     timer: 2500
                 });
-                console.log(data, 'user')
                 navigate('/pokemons/profile');
                 setLoading(false)
                 // Redirige a la página deseada después del inicio de sesión exitoso

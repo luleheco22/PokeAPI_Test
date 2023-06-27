@@ -17,10 +17,11 @@ const ProtectedRoute = () => {
     const { user  } = useAuth();
     const { loading } = usePokemon();
     const location = useLocation();
+    console.log(user, 'El user de protect')
 
   return (
     <>
-    {user?.id ? (
+    {user?._id  || user?.id ? (
         <>
         <Container>
             <Header />
