@@ -21,7 +21,7 @@ const ProtectedRoute = () => {
 
   return (
     <>
-    {user?._id  || user?.id ? (
+    {user?._id ? (
         <>
         <Container>
             <Header />

@@ -115,10 +115,11 @@ const PokemonProvider: React.FC<PokemonProviderProps> = ({ children }) => {
 
     const getPokemon = async (id: string) => {
         try {
-            setLoading(true);
             const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
-            setPokemon(response.data);
-            setLoading(false);
+            if (response.status === 200 && response) {
+                setPokemon(response.data);
+               
+            }
         } catch (error) {
             console.log("Error fetching Pokémon:", error);
         }
